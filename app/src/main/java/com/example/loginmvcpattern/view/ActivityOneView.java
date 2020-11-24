@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.loginmvcpattern.R;
 import com.example.loginmvcpattern.controller.LoginController;
@@ -23,7 +24,7 @@ public class ActivityOneView {
     public ActivityOneView(Context context, ViewGroup viewGroup) {
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_main, viewGroup);
         model = new LoginModel();
-        loginController = new LoginController();
+        loginController = new LoginController(model, this);
 
     }
 
@@ -37,7 +38,7 @@ public class ActivityOneView {
             @Override
             public void onClick(View v) {
 
-                loginController.validateData(context,enterName.getText().toString(),enterPass.getText().toString());
+                loginController.validateData(context, enterName.getText().toString(), enterPass.getText().toString());
             }
         });
 
@@ -47,6 +48,12 @@ public class ActivityOneView {
                 loginController.goToSignUpPage(context);
             }
         });
+    }
+
+    public void showToast(boolean result) {
+        if (result) {
+            Toast.makeText(rootView.getContext(), "Data validated! Login Successful", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public View getRootView() {

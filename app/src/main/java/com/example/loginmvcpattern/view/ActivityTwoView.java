@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.loginmvcpattern.R;
 import com.example.loginmvcpattern.controller.SignUpController;
@@ -21,7 +22,7 @@ public class ActivityTwoView {
     public ActivityTwoView(Context context, ViewGroup viewGroup) {
         rootView = LayoutInflater.from(context).inflate(R.layout.activity_main2, viewGroup);
         model = new LoginModel();
-        controller = new SignUpController();
+        controller = new SignUpController(this,model);
     }
 
 public void initViews(Context context) {
@@ -36,7 +37,11 @@ public void initViews(Context context) {
             }
         });
     }
-
+public void showToast(boolean result){
+        if(result){
+            Toast.makeText(rootView.getContext(), "Data added Successfully", Toast.LENGTH_SHORT).show();
+        }
+}
     public View getRootView() {
         return this.rootView;
     }

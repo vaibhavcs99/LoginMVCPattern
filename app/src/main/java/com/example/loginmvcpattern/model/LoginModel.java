@@ -16,16 +16,19 @@ public class LoginModel {
     Button logIn, signUp;
     SharedPreferences sharedPreferences;
 
-    public void validateData(Context context,String enterName,String enterPass) {
+    public boolean validateData(Context context,String enterName,String enterPass) {
 
         sharedPreferences = context.getSharedPreferences(MYPREF, Context.MODE_PRIVATE);
         String checkPassword = sharedPreferences.getString(enterName, "");
 
+/*
         if (enterPass.equals(checkPassword)) {
             Toast.makeText(context, "Data Exists, Login Successful", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "Data not found", Toast.LENGTH_SHORT).show();
         }
+*/
+        return true;
 
     }
     public void goToSignUpPage(Context context) {
@@ -33,12 +36,13 @@ public class LoginModel {
         context.startActivity(intent);
     }
 
-    public void addDataToPref(Context context,String createName,String createPass) {
+    public boolean addDataToPref(Context context,String createName,String createPass) {
         sharedPreferences = context.getSharedPreferences(MYPREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(createName, createPass);
         editor.apply();
-        Toast.makeText(context, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+        return true;
     }
 }
