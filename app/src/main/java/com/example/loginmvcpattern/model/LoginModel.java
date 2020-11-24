@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.loginmvcpattern.MainActivity2;
 
@@ -16,27 +15,26 @@ public class LoginModel {
     Button logIn, signUp;
     SharedPreferences sharedPreferences;
 
-    public boolean validateData(Context context,String enterName,String enterPass) {
+    public boolean validateData(Context context, String enterName, String enterPass) {
 
         sharedPreferences = context.getSharedPreferences(MYPREF, Context.MODE_PRIVATE);
         String checkPassword = sharedPreferences.getString(enterName, "");
 
-/*
+
         if (enterPass.equals(checkPassword)) {
-            Toast.makeText(context, "Data Exists, Login Successful", Toast.LENGTH_SHORT).show();
+            return true;
         } else {
-            Toast.makeText(context, "Data not found", Toast.LENGTH_SHORT).show();
+            return false;
         }
-*/
-        return true;
 
     }
+
     public void goToSignUpPage(Context context) {
         Intent intent = new Intent(context, MainActivity2.class);
         context.startActivity(intent);
     }
 
-    public boolean addDataToPref(Context context,String createName,String createPass) {
+    public boolean addDataToPref(Context context, String createName, String createPass) {
         sharedPreferences = context.getSharedPreferences(MYPREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 

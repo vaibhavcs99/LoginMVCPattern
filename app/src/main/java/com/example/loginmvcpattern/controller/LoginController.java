@@ -4,10 +4,9 @@ import android.content.Context;
 
 import com.example.loginmvcpattern.model.LoginModel;
 import com.example.loginmvcpattern.view.ActivityOneView;
-import com.example.loginmvcpattern.view.ActivityTwoView;
 
 public class LoginController {
-    LoginModel model ;
+    LoginModel model;
     ActivityOneView view;
 
     public LoginController(LoginModel model, ActivityOneView view) {
@@ -16,10 +15,8 @@ public class LoginController {
     }
 
     public void validateData(Context context, String enterName, String enterPass) {
-       boolean result = model.validateData(context,enterName,enterPass);
-       if(result){
-           view.showToast(result);
-       }
+        boolean result = model.validateData(context, enterName, enterPass);
+        view.showToast(result);
     }
 
     public void goToSignUpPage(Context context) {

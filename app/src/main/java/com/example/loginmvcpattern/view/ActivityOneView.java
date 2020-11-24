@@ -53,6 +53,8 @@ public class ActivityOneView {
     public void showToast(boolean result) {
         if (result) {
             Toast.makeText(rootView.getContext(), "Data validated! Login Successful", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(rootView.getContext(), "Data not found", Toast.LENGTH_SHORT).show();
         }
     }
 
