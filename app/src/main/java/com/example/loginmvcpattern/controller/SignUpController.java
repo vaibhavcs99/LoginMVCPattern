@@ -1,21 +1,21 @@
 package com.example.loginmvcpattern.controller;
 
-import android.content.Context;
-
+import com.example.loginmvcpattern.model.InterfaceLoginModel;
 import com.example.loginmvcpattern.model.LoginModel;
-import com.example.loginmvcpattern.view.ActivityTwoView;
+import com.example.loginmvcpattern.view.SignUpInterface;
 
-public class SignUpController {
-    ActivityTwoView view;
-    LoginModel model;
+public class SignUpController implements SignUpInterface.Presenter {
+    InterfaceLoginModel model;
+    SignUpInterface.View view;
 
-    public SignUpController(ActivityTwoView view, LoginModel model) {
-        this.view = view;
+    public SignUpController(InterfaceLoginModel model, SignUpInterface.View view) {
         this.model = model;
+        this.view = view;
+        view.setPresenter(this);
     }
 
-    public void addDataToPref(Context context, String enterName, String enterPass) {
-        boolean result = model.addDataToPref(context, enterName, enterPass);
+    public void onAddDataClicked(String enterName, String enterPass) {
+        boolean result = model.addDataToPref(enterName, enterPass);
         if (result) {
             view.showToast(result);
         }
