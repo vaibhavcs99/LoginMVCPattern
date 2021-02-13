@@ -1,23 +1,19 @@
 package com.example.loginmvcpattern.model;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.example.loginmvcpattern.MainActivity2;
+import com.example.loginmvcpattern.view.MainActivity;
 
-public class LoginModel {
+public class LoginModel implements InterfaceLoginModel {
 
     private static final String MYPREF = "mypref";
-    EditText enterName, enterPass;
-    Button logIn, signUp;
     SharedPreferences sharedPreferences;
 
-    public boolean validateData(Context context, String enterName, String enterPass) {
+    @Override
+    public boolean validateData(String enterName, String enterPass) {
 
-        sharedPreferences = context.getSharedPreferences(MYPREF, Context.MODE_PRIVATE);
+        sharedPreferences = MainActivity.getContext().getSharedPreferences(MYPREF, Context.MODE_PRIVATE);
         String checkPassword = sharedPreferences.getString(enterName, "");
 
 
@@ -29,13 +25,9 @@ public class LoginModel {
 
     }
 
-    public void goToSignUpPage(Context context) {
-        Intent intent = new Intent(context, MainActivity2.class);
-        context.startActivity(intent);
-    }
-
-    public boolean addDataToPref(Context context, String createName, String createPass) {
-        sharedPreferences = context.getSharedPreferences(MYPREF, Context.MODE_PRIVATE);
+    @Override
+    public boolean addDataToPref(String createName, String createPass) {
+        sharedPreferences = MainActivity.getContext().getSharedPreferences(MYPREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(createName, createPass);
